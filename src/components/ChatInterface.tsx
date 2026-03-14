@@ -485,12 +485,12 @@ const ChatInterface: React.FC = () => {
                     return (
                       <div key={msg.id} className={`flex ${isOutgoing ? 'justify-end' : 'justify-start'} group animate-in fade-in slide-in-from-bottom-2 duration-300`}>
                         <div className={`flex flex-col max-w-[75%] ${isOutgoing ? 'items-end' : 'items-start'}`}>
-                          <div 
+                          <div
                             className={`px-5 py-3 rounded-2xl shadow-md relative text-sm leading-relaxed ${
-                              isOutgoing 
+                              isOutgoing
                                 ? msg.fromType === 'nina'
-                                  ? 'bg-gradient-to-br from-primary to-primary/80 text-foreground rounded-tr-sm shadow-violet-900/20'
-                                  : 'bg-gradient-to-br from-primary to-primary/80 text-foreground rounded-tr-sm shadow-none'
+                                  ? 'bg-primary text-primary-foreground rounded-tr-sm'
+                                  : 'bg-primary text-primary-foreground rounded-tr-sm'
                                 : 'bg-muted text-foreground rounded-tl-sm border border-border/50'
                             }`}
                           >
@@ -506,7 +506,7 @@ const ChatInterface: React.FC = () => {
                             )}
                             <span className="text-[10px] text-muted-foreground font-medium">{msg.timestamp}</span>
                             {isOutgoing && (
-                              msg.status === 'read' ? <CheckCheck className="w-3.5 h-3.5 text-foreground" /> : 
+                              msg.status === 'read' ? <CheckCheck className="w-3.5 h-3.5 text-green-500" /> :
                               msg.status === 'delivered' ? <CheckCheck className="w-3.5 h-3.5 text-muted-foreground" /> :
                               <Check className="w-3.5 h-3.5 text-muted-foreground" />
                             )}
