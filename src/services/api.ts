@@ -1345,21 +1345,10 @@ export const api = {
 
     console.log('[API] Message queued for sending');
 
-    // Trigger whatsapp-sender to process the queue immediately
-    try {
-      console.log('[API] Triggering whatsapp-sender...');
-      const { error: triggerError } = await supabase.functions.invoke('whatsapp-sender');
-      
-      if (triggerError) {
-        console.error('[API] Error triggering whatsapp-sender:', triggerError);
-        // Don't throw - message is in queue and will be processed eventually
-      } else {
-        console.log('[API] whatsapp-sender triggered successfully');
-      }
-    } catch (err) {
+    // Trigger whatsapp-sender in background (non-blocking for fast UI response)
+    supabase.functions.invoke('whatsapp-sender').catch(err => {
       console.error('[API] Failed to trigger whatsapp-sender:', err);
-      // Don't throw - message is in queue
-    }
+    });
 
     return msgData.id;
   },
